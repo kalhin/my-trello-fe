@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Board from "./Board";
-import AddBoardPopup from './AddBoardModal'
+// import AddBoardPopup from './AddBoardModal'
 import { getBoards } from "../api/api";
 
 export default function Basement() {
@@ -26,7 +26,7 @@ export default function Basement() {
     <div>
       <ul>{boardItem}</ul>
       <button type="button" onClick={() => setOpen(true)}>Add Board</button>
-      <AddBoardPopup />
+      {/* <AddBoardPopup /> */}
     </div>
   );
 }
