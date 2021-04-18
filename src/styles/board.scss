@@ -1,0 +1,8 @@
+.board {
+  &__listItems {
+    display: flex;
+  }
+  &__item {
+    list-style-type: none;
+  }
+}

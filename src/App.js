@@ -1,11 +1,11 @@
 import React from 'react';
-import Basement from './components/Basement'
-import './App.css';
+import MainLayout from './components/MainLayout'
+import './styles/index.scss'
 
 function App() {
   return (
     <div className="App">
-      <Basement/>
+      <MainLayout/>
     </div>
   );
 }
