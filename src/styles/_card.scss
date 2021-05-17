@@ -1,0 +1,10 @@
+.card {
+    &__content {
+        position: relative;
+    }
+    &__title {
+        cursor: pointer;
+        padding-left: 7px;
+        @include cut-text;
+    }
+}

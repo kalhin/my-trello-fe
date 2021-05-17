@@ -1,0 +1,8 @@
+@mixin cut-text {
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    width: 270px; 
+    height: 1.2em; 
+    white-space: nowrap;
+}
+
