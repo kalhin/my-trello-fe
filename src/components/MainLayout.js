@@ -13,16 +13,20 @@ import AddButton from "./AddButton";
 import AddItemModal from "./AddItemModal";
 import Draggable, { DraggableCore } from "react-draggable";
 import { BOARD } from "../constants/constants";
+import { getTodos } from "../api/api";
+import Loader from "./Loader";
 
 export default function MainLayout() {
-  useEffect(() => {
-    const toDosList = store.getState().toDosList;
+  useEffect(async () => {
+    setShowLoader(true);
+    const toDosList = await getTodos();
+    setShowLoader(false);
     setBoard(toDosList);
   }, []);
 
   const [boardListItems, setBoard] = useState([]);
-  // const [openAddBoardModal, setOpenAddBoardModal] = useState(false);
   const [addBoard, setAddBoardField] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
 
   const handleClick = () => {
     setAddBoardField(true);
@@ -35,16 +39,16 @@ export default function MainLayout() {
   const handleSaveName = (e) => {
     e.preventDefault();
     console.log(e.target.value);
-    setAddBoardField(false);
-    // const newToDoItem = {
-    //   "id": new Date().getMilliseconds(),
-    //   "title": name,
-    //   "label": "",
-    //   "cards": []
-    // };
+    const newToDoItem = {
+      id: new Date().getMilliseconds(),
+      title: name,
+      label: "",
+      cards: [],
+    };
     // store.dispatch(addToDoItem(newToDoItem));
     // setOpenAddBoardModal(false);
     // console.log(store.getState().toDosList)
+    setAddBoardField(false);
   };
 
   const boardItem = boardListItems.map((item) => (
@@ -55,6 +59,7 @@ export default function MainLayout() {
 
   return (
     <StylesProvider injectFirst>
+      {showLoader ? <Loader /> : ""}
       <div className="board">
         <ul className="board__listItems">
           {boardItem}
@@ -68,11 +73,12 @@ export default function MainLayout() {
               />
             </form>
           ) : (
-            <AddButton
-              onClick={handleClick}
-              buttonText={BOARD.BUTTONS.ADD_BOARD}
-            />
+            ""
           )}
+          <AddButton
+            onClick={handleClick}
+            buttonText={BOARD.BUTTONS.ADD_BOARD}
+          />
         </ul>
         {/* <AddItemModal
         openModal={openAddBoardModal}

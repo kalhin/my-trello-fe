@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-export const getBoards = async () => {
-    let res = await axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=5`)
-    return res.data
-}
+import { ENDPOINTS } from "./endpoints";
+
+export async function getTodos () {
+    try {
+        let res = await axios.get(ENDPOINTS.TO_DOS);
+        return res.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
