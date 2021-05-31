@@ -1,6 +1,15 @@
+import { applyMiddleware } from 'redux';
+import logger from "redux-logger";
+import createSagaMiddleware from "redux-saga"
 import { createStore } from 'redux';
-import reducer from './reducers/reducer'
+import rootReducer from './reducers/rootReducer';
+import { watchLoadBoards, watchAddBoard,  watchLoadLists, watchAddList } from './sagas/sagas';
 
-const store = createStore(reducer);
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(rootReducer, applyMiddleware(logger, sagaMiddleware));
+sagaMiddleware.run(watchLoadBoards);
+sagaMiddleware.run(watchLoadLists);
+sagaMiddleware.run(watchAddList);
+sagaMiddleware.run(watchAddBoard);
 
 export default store;

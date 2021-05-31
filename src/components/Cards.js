@@ -2,17 +2,18 @@ import React, { useState } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
+// import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { TextField } from "@material-ui/core";
-import { createMuiTheme } from "@material-ui/core/styles";
+// import { createMuiTheme } from "@material-ui/core/styles";
 import Tooltip from '@material-ui/core/Tooltip';
+import AddButton from "./AddButton";
 
 import TodoItem from "./TodoItem";
 import DropDownMenu from "./DropDownMenu";
-import { ITEMS } from "../constants/constants";
+import { CARDS } from "../constants/constants";
 
 const useStyles = makeStyles({
   root: {
@@ -28,14 +29,16 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ListItem(props) {
-  const { item, title, cards, updatedListItems } = props;
+export default function Cards(props) {
+  const { item, title = "", cards = [], updatedListItems } = props;
 
-  const [currentItem, setCurrentItem] = useState(null);
+  // const [currentItem, setCurrentItem] = useState(null);
   const [titleEditing, setTitleEditing] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(true);
+
   const classes = useStyles();
 
-  const todoItem = cards.map((todo) => (
+  const cardsList = cards.map((todo) => (
     <li className="board__item" key={todo.id}>
       <TodoItem title={todo.title} description={todo.description} />
     </li>
@@ -43,7 +46,7 @@ export default function ListItem(props) {
 
   const dragStartHandler = (e, item) => {
     console.log("start", item);
-    setCurrentItem(item);
+    // setCurrentItem(item);
   };
 
   const dragLeaveHandler = (e) => {};
@@ -56,7 +59,7 @@ export default function ListItem(props) {
 
   const dropHandler = (e, item) => {
     e.preventDefault();
-    setCurrentItem();
+    // setCurrentItem();
   };
 
   const handleChangeTitle = () => {
@@ -79,6 +82,10 @@ export default function ListItem(props) {
     console.log("save");
     setTitleEditing(false);
   };
+
+  const handleAddCard = () => {
+    console.log('addcard')
+  }
 
   return (
     <Card
@@ -114,10 +121,17 @@ export default function ListItem(props) {
               {title}
             </Typography>
             </Tooltip>
-            <DropDownMenu options={ITEMS.OPTIONS} />
+            {showDropdown ? <DropDownMenu options={CARDS.OPTIONS} /> : ""}
           </div>
         )}
-        <ul>{todoItem}</ul>
+        <ul>{cardsList}</ul>
+        <div className="card__add-button">
+        <AddButton
+            onClick={handleAddCard}
+            buttonText={CARDS.BUTTONS.ADD_CARD}
+            margin="15px 0 0"
+          />
+        </div>
       </CardContent>
       {/* <CardActions>
         <Button size="small">Learn More</Button>

@@ -7,4 +7,7 @@
         padding-left: 7px;
         @include cut-text;
     }
+    &__add-button {
+        margin-top: 10px;
+    }
 }

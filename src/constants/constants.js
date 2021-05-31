@@ -1,7 +1,6 @@
-import { BOARD } from "./board"
-import { ITEMS } from "./items"
+import { BOARD } from "./board";
+import { CARDS } from "./card";
+import { MAIN_PAGE } from "./mainPage";
+import { ROUTES } from "./routes";
 
-export {
-    BOARD,
-    ITEMS
-}
+export { BOARD, CARDS, MAIN_PAGE, ROUTES };

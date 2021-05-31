@@ -3,15 +3,16 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Add from '@material-ui/icons/Add';
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    margin: 10,
-    minWidth: 275
-  },
-}));
-
 export default function AddButton(props) {
-  const { buttonText, onClick } = props;
+  const { buttonText, onClick, width = '100%', margin = 0, backgroundColor = 'white' } = props;
+  
+  const useStyles = makeStyles((theme) => ({
+    button: {
+      margin: margin,
+      width: width,
+      backgroundColor: backgroundColor
+    },
+  }));
   
   const classes = useStyles();
 
